@@ -1,13 +1,17 @@
-import { useState } from "react";
-import { Button, Card, Col, Form, Row } from "react-bootstrap";
+import { useState } from 'react';
+import { Button, Card, Col, Form, Row } from 'react-bootstrap';
 
-const NewBook = () => {
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
-  const [rating, setRating] = useState("");
-  const [pageCount, setPageCount] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+const NewBook = ({books, setBooksAdded}) => {
+  const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState('');
+  const [rating, setRating] = useState('');
+  const [pageCount, setPageCount] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
   const [available, setAvailable] = useState(false);
+
+
+  
+
 
   const handleChangeTitle = (event) => {
     setTitle(event.target.value);
@@ -33,6 +37,7 @@ const NewBook = () => {
     event.preventDefault();
 
     const bookData = {
+      id: books.length + 1,
       title,
       author,
       rating: parseInt(rating, 10),
@@ -40,11 +45,19 @@ const NewBook = () => {
       imageUrl,
       available,
     };
-    console.log(bookData);
+
+    setBooksAdded([...books, bookData]);
+
+    setTitle('');
+    setAuthor('');
+    setImageUrl('');
+    setRating('');
+    setPageCount('');
+    setAvailable('');
   };
 
   return (
-    <Card className="m-4 w-50" bg="success">
+    <Card className="m-4 container mx-auto  w-50" bg="success">
       <Card.Body>
         <Form className="text-white" onSubmit={handleAddBook}>
           <Row>

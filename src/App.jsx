@@ -1,8 +1,9 @@
 import BookItem from "./components/bookItem/BookItem";
 import NewBook from "./components/newBook/NewBook";
 import Books from "./components/books/Books";
+import { useState } from "react";
 function App() {
-  const books = [
+  const booksData = [
     {
       id: 1,
       title: "Harry Potter 1",
@@ -52,11 +53,14 @@ function App() {
         "En un mundo gobernado por un régimen totalitario, un hombre lucha contra la vigilancia constante y la manipulación de la verdad.",
     },
   ];
+
+  const [ books , setBooksAdded] = useState(booksData)
+
   return (
     <div className="d-flex flex-column align-items-center">
       <h2>Books champion app</h2>
       <p>¡Quiero leer libros!</p>
-      <NewBook />
+      <NewBook books={books} setBooksAdded={setBooksAdded}/>
       <Books books={books} />
     </div>
   );
